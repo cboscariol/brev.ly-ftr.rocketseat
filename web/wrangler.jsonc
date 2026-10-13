@@ -1,0 +1,11 @@
+// Deploy do frontend no Cloudflare Workers (static assets): `pnpm build && pnpm dlx wrangler deploy`
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "brevly-web",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Fallback da SPA: qualquer rota sem arquivo correspondente devolve o index.html.
+    "not_found_handling": "single-page-application"
+  }
+}
