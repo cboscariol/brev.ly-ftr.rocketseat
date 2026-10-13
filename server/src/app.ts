@@ -7,6 +7,9 @@ import {
 } from 'fastify-type-provider-zod'
 import { type Env, getCorsOrigins } from './config/env'
 import type { Database } from './db/client'
+import { createLinksRepository } from './modules/links/links.repository'
+import { linksRoutes } from './modules/links/links.routes'
+import { createLinksService } from './modules/links/links.service'
 import { errorHandler } from './plugins/error-handler'
 
 export type AppDependencies = {
@@ -31,7 +34,8 @@ export async function buildApp({ env, db }: AppDependencies) {
 
   app.get('/health', async () => ({ status: 'ok' }))
 
-  void db
+  const linksService = createLinksService(createLinksRepository(db), env.FRONTEND_URL)
+  await app.register(linksRoutes, { prefix: '/api/links', service: linksService })
 
   return app
 }
