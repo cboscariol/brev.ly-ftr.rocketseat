@@ -43,14 +43,13 @@ export function Redirecting({ url }: { url?: string }) {
       <h1 className="font-bold text-gray-600 text-xl">Redirecionando...</h1>
       <div className="flex flex-col gap-1 font-semibold text-gray-500 text-md" aria-live="polite">
         <p>O link será aberto automaticamente em alguns instantes.</p>
-        {url && (
-          <p>
-            Não foi redirecionado?{' '}
-            <a href={url} className="text-blue-base underline">
-              Acesse aqui
-            </a>
-          </p>
-        )}
+        <p>
+          Não foi redirecionado?{' '}
+          {/* Sem href até o destino ser conhecido (o link fica inativo por instantes). */}
+          <a href={url} aria-disabled={!url || undefined} className="text-blue-base underline">
+            Acesse aqui
+          </a>
+        </p>
       </div>
     </StatusCard>
   )

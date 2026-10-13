@@ -55,6 +55,11 @@ Loading da lista, feedback de sucesso/erro da API (toast), página de erro tempo
 - **Redirecionamento:** a rota `/:shortCode` exibe a tela "Redirecionando..." enquanto resolve e contabiliza; o link "Acesse aqui" aponta para a URL original assim que conhecida.
 - **Lint/format:** Biome (um único binário, sem plugins).
 - **Variável extra no backend:** `FRONTEND_URL` — necessária para a API e o CSV montarem a URL encurtada completa. `CORS_ORIGIN` aceita lista separada por vírgula e, se ausente, usa `FRONTEND_URL`.
+- **Portas:** API em `3333`, Vite em `5173` e web do Docker Compose em `4173` (a 8080 costuma estar ocupada por outros servidores de desenvolvimento).
+- **`created_at` com precisão de milissegundos** (`timestamp(3)`): o cursor da exportação usa o `Date` do JavaScript; com microssegundos, a paginação por cursor poderia pular ou repetir linhas.
+- **Toasts:** biblioteca `sonner`, estilizada com os tokens do Style Guide.
+- **Falha ao registrar acesso:** se a resolução funcionar mas o `POST /access` falhar por rede ou servidor, o visitante é redirecionado mesmo assim. Código inexistente nunca redireciona nem conta acesso.
+- **Validação da URL no frontend:** além de http(s), exige um domínio com ponto (ex.: `exemplo.com`), para pegar erros de digitação. A API aceita qualquer URL http(s) válida.
 
 ## 5. Contrato da API
 
