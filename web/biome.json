@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["**", "!dist", "!coverage", "!src/vite-env.d.ts"]
+    "includes": ["**", "!dist", "!coverage", "!src/vite-env.d.ts", "!**/*.svg"]
   },
   "formatter": {
     "indentStyle": "space",

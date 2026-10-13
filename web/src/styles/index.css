@@ -1,1 +1,49 @@
 @import "tailwindcss";
+
+/*
+ * Tokens extraídos do Style Guide do Figma (node 1085:710).
+ * Todos os componentes usam estes tokens; não use cores/tamanhos soltos.
+ */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-blue-base: #2c46b1;
+  --color-blue-dark: #2c4091;
+  --color-gray-100: #f9f9fb;
+  --color-gray-200: #e4e6ec;
+  --color-gray-300: #cdcfd5;
+  --color-gray-400: #74798b;
+  --color-gray-500: #4d505c;
+  --color-gray-600: #1f2025;
+  --color-danger: #b12c4d;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala tipográfica (tamanho/altura de linha); o peso é aplicado por font-* */
+  --text-xl: 24px;
+  --text-xl--line-height: 32px;
+  --text-lg: 18px;
+  --text-lg--line-height: 24px;
+  --text-md: 14px;
+  --text-md--line-height: 18px;
+  --text-sm: 12px;
+  --text-sm--line-height: 16px;
+  --text-xs: 10px;
+  --text-xs--line-height: 14px;
+}
+
+@layer base {
+  html {
+    @apply bg-gray-200 font-sans text-gray-600 antialiased;
+  }
+
+  body {
+    @apply min-h-dvh;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-base;
+  }
+}
