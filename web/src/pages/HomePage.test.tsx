@@ -60,7 +60,7 @@ describe('Home — listagem', () => {
   })
 
   it('mostra erro e permite tentar novamente', async () => {
-    vi.mocked(api.listLinks).mockRejectedValueOnce(new ApiError(500, 'X', 'Falhou'))
+    vi.mocked(api.listLinks).mockRejectedValue(new ApiError(500, 'X', 'Falhou'))
 
     renderRoute('/')
 
