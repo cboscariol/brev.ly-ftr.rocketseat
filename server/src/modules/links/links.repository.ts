@@ -23,6 +23,20 @@ export function createLinksRepository(db: Database) {
       return { items, total: totals?.total ?? 0 }
     },
 
+    // Keyset pagination: busca o próximo lote depois do cursor, usando o índice (created_at, id).
+    async listBatch({ after, limit }: { after?: { createdAt: Date; id: string }; limit: number }) {
+      return db
+        .select()
+        .from(links)
+        .where(
+          after
+            ? sql`(${links.createdAt}, ${links.id}) < (${after.createdAt.toISOString()}::timestamptz, ${after.id}::uuid)`
+            : undefined,
+        )
+        .orderBy(desc(links.createdAt), desc(links.id))
+        .limit(limit)
+    },
+
     async findByShortCode(shortCode: string) {
       const [link] = await db
         .select()

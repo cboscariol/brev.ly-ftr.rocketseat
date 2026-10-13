@@ -3,7 +3,7 @@ CREATE TABLE "links" (
 	"original_url" text NOT NULL,
 	"short_code" varchar(32) NOT NULL,
 	"access_count" integer DEFAULT 0 NOT NULL,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp (3) with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "links_access_count_non_negative" CHECK ("links"."access_count" >= 0)
 );
 --> statement-breakpoint

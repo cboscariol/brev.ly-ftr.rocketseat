@@ -1,5 +1,5 @@
 {
-  "id": "10fa1034-f48a-4a9f-984c-66f2537468b1",
+  "id": "acb11b26-7f11-41f2-8e90-9e196fc8de50",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -36,7 +36,7 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp with time zone",
+          "type": "timestamp (3) with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"

@@ -18,7 +18,7 @@ export const links = pgTable(
     originalUrl: text('original_url').notNull(),
     shortCode: varchar('short_code', { length: 32 }).notNull(),
     accessCount: integer('access_count').notNull().default(0),
-    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    createdAt: timestamp('created_at', { withTimezone: true, precision: 3 }).notNull().defaultNow(),
   },
   (table) => [
     // Unicidade case-insensitive: "Portfolio-Dev" e "portfolio-dev" são o mesmo código.
