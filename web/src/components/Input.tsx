@@ -7,10 +7,12 @@ type InputProps = ComponentProps<'input'> & {
   /** Texto fixo exibido antes do valor (ex.: "brev.ly/"). */
   prefix?: string
   error?: string
+  /** Deixa o prefixo esmaecido (campo vazio), como no Figma. */
+  prefixMuted?: boolean
 }
 
 /** Style Guide: Input (default / active / error). */
-export function Input({ label, prefix, error, id, className, ...props }: InputProps) {
+export function Input({ label, prefix, prefixMuted, error, id, className, ...props }: InputProps) {
   const generatedId = useId()
   const inputId = id ?? generatedId
   const errorId = `${inputId}-error`
@@ -37,7 +39,11 @@ export function Input({ label, prefix, error, id, className, ...props }: InputPr
             : 'border-gray-300 group-focus-within:border-[1.5px] group-focus-within:border-blue-base',
         )}
       >
-        {prefix && <span className="shrink-0 text-gray-400">{prefix}</span>}
+        {prefix && (
+          <span className={cn('shrink-0', prefixMuted ? 'text-gray-400' : 'text-gray-600')}>
+            {prefix}
+          </span>
+        )}
         <input
           id={inputId}
           aria-invalid={error ? true : undefined}
