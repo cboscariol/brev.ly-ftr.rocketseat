@@ -10,7 +10,11 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3333),
   DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
-  FRONTEND_URL: z.url().transform((url) => url.replace(/\/+$/, '')),
+  // Opcional: o enunciado não lista esta variável, então há um padrão para desenvolvimento.
+  FRONTEND_URL: z
+    .url()
+    .default('http://localhost:5173')
+    .transform((url) => url.replace(/\/+$/, '')),
   CORS_ORIGIN: optionalString,
   CLOUDFLARE_ACCOUNT_ID: optionalString,
   CLOUDFLARE_ACCESS_KEY_ID: optionalString,
@@ -27,7 +31,11 @@ const envSchema = z.object({
 export type Env = z.infer<typeof envSchema>
 
 export function parseEnv(source: NodeJS.ProcessEnv = process.env): Env {
-  const result = envSchema.safeParse(source)
+  // Variáveis em branco (ex.: "PORT=" copiado do .env.example) valem como ausentes.
+  const cleaned = Object.fromEntries(
+    Object.entries(source).filter(([, value]) => value !== undefined && value.trim() !== ''),
+  )
+  const result = envSchema.safeParse(cleaned)
 
   if (!result.success) {
     // Mostra apenas os nomes das variáveis inválidas, nunca os valores.

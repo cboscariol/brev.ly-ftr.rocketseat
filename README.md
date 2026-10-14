@@ -80,7 +80,7 @@ docker compose up --build
 | `PORT` | não (3333) | Porta HTTP da API |
 | `NODE_ENV` | não | `development`, `test` ou `production` |
 | `DATABASE_URL` | sim | Conexão PostgreSQL |
-| `FRONTEND_URL` | sim | URL pública do frontend — usada para montar a URL encurtada na API e no CSV |
+| `FRONTEND_URL` | não (`http://localhost:5173`) | URL pública do frontend — usada para montar a URL encurtada na API e no CSV |
 | `CORS_ORIGIN` | não | Origens permitidas, separadas por vírgula (padrão: `FRONTEND_URL`) |
 | `CLOUDFLARE_ACCOUNT_ID` | para exportar | ID da conta Cloudflare |
 | `CLOUDFLARE_ACCESS_KEY_ID` | para exportar | Access Key ID do token R2 |
@@ -88,7 +88,7 @@ docker compose up --build
 | `CLOUDFLARE_BUCKET` | para exportar | Nome do bucket |
 | `CLOUDFLARE_PUBLIC_URL` | para exportar | URL pública do bucket (`https://pub-xxxx.r2.dev` ou domínio próprio) |
 
-Sem as variáveis do Cloudflare a API funciona normalmente, mas `POST /api/links/export` responde `503 STORAGE_NOT_CONFIGURED`. A API valida as variáveis na inicialização e nunca imprime seus valores.
+Sem as variáveis do Cloudflare a API funciona normalmente, mas `POST /api/links/export` responde `503 STORAGE_NOT_CONFIGURED`. A API valida as variáveis na inicialização e nunca imprime seus valores. Variáveis em branco (como `PORT=`) são tratadas como ausentes e usam o valor padrão.
 
 ### `web/.env`
 
