@@ -41,6 +41,7 @@ cd server
 cp .env.example .env
 pnpm install
 pnpm db:migrate
+pnpm db:seed   # opcional: cadastra 4 links de exemplo (idempotente)
 pnpm dev
 ```
 
@@ -115,6 +116,7 @@ Apenas em `server/`:
 | Script | Descrição |
 |---|---|
 | `pnpm db:migrate` | Aplica as migrations versionadas em `server/drizzle/` |
+| `pnpm db:seed` | Insere links de exemplo (os mesmos do Figma); pode ser executado várias vezes sem duplicar |
 | `pnpm db:generate` | Gera uma nova migration a partir de `src/db/schema.ts` |
 | `pnpm db:studio` | Abre o Drizzle Studio |
 
